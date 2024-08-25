@@ -1,0 +1,41 @@
+<h2>
+    employees list
+</h2>
+<div class="container">
+    <button class="add-btn">add employee</button>
+</div>
+<div class="search">
+    <select id="inputState" class="form-control" ngModel (ngModelChange)="whichSearchTypeOpen($event)">
+        <option value="">searchBy </option>
+        <option value="0">salary</option>
+        <option value="1">employeeId</option>
+    </select>
+    <div class="form-outline" *ngIf="openSortInputBySalary">
+        <input type="tel" name="grade" [(ngModel)]="grade" pattern="[0-9]+" #highNumber
+            (change)="onSortInputBySalary(highNumber)" id="typePhone" class="form-control" />
+    </div>
+
+    <div class="form-outline" *ngIf="openSortInputById">
+        <input type="tel" name="grade" [(ngModel)]="grade" pattern="[0-9]+" #numberLow
+            (change)="onSortInputById(numberLow)" id="typePhone" class="form-control" />
+    </div>
+</div>
+<app-smart-card>
+    <div body>
+        <div *ngIf="myProjectArr?.length == 0">
+            <br>
+            <h2>לא נמצאו פרויקטים!</h2>
+        </div>
+        <app-pop-up-for-image *ngIf="!myProjectArr" [title]="'רק רגע...'">
+            <div body class="body-content">
+                <img src="../../assets/images/spinner.gif" id="pop-up-image" />
+            </div>
+        </app-pop-up-for-image>
+        <div *ngIf="myProjectArr?.length > 0 ">
+            <app-smart-table [ifShowpagination]="[true,10]" [thArr]="thArrTableMyProjects" [ifSortDown]="ifSortDown"
+                [tableDataKeys]="myProjectListKeys" [tableData]="myProjectArr" (SortTableDown)="sortTableDown($event)"
+                (SortTableUp)="sortTableUp($event)">
+            </app-smart-table>
+        </div>
+    </div>
+</app-smart-card>

@@ -1,0 +1,25 @@
+<app-pop-up *ngIf="isPopUpOpen">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <div>
+        <label for="name">Name:</label>
+        <input id="name" name="name" [(ngModel)]="model.name" required>
+      </div>
+    
+      <div>
+        <label for="salary">Salary:</label>
+        <input id="salary" type="number" name="salary" [(ngModel)]="model.salary" required>
+      </div>
+    
+      <div>
+        <label for="dueDate">Due Date:</label>
+        <input id="dueDate" type="date" name="dueDate" [(ngModel)]="model.dueDate" required>
+      </div>
+    
+      <div>
+        <label for="age">Age:</label>
+        <input id="age" type="number" name="age" [(ngModel)]="model.age" required>
+      </div>
+    
+      <button type="submit">Submit</button>
+    </form>
+</app-pop-up>

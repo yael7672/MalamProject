@@ -1,0 +1,41 @@
+<h2>
+    employees list
+</h2>
+<div class="container">
+    <button class="add-btn" (click)="openPopUp('addEmployee','true)">add employee</button>
+</div>
+<div class="search">
+    <select id="inputState" class="form-control" ngModel (ngModelChange)="whichSearchTypeOpen($event)">
+        <option value="">searchBy </option>
+        <option value="0">salary</option>
+        <option value="1">employeeId</option>
+    </select>
+    <div class="form-outline" *ngIf="openSortInputBySalary">
+        <input type="tel" name="employeeSalary" [(ngModel)]="employeeSalary" pattern="[0-9]+" #employeeSalary
+            (change)="onSortInputBySalary(employeeSalary)" id="typePhone" class="form-control" />
+    </div>
+
+    <div class="form-outline" *ngIf="openSortInputById">
+        <input type="tel" name="employeeId" [(ngModel)]="employeeId" pattern="[0-9]+" #employeeId
+            (change)="onSortInputById(employeeId)" id="typePhone" class="form-control" />
+    </div>
+</div>
+<app-smart-card>
+    <div body>
+        <div *ngIf="myEmployeesArr?.length == 0">
+            <br>
+            <h2>no employees</h2>
+        </div>
+        <app-pop-up-for-image *ngIf="!myEmployeesArr" [title]="'רק רגע...'">
+            <div body class="body-content">
+                <img src="../../assets/images/spinner.gif" id="pop-up-image" />
+            </div>
+        </app-pop-up-for-image>
+        <div *ngIf="myEmployeesArr?.length > 0 ">
+            <app-smart-table [ifShowpagination]="[true,10]" [thArr]="thArrTableMyEmployees" [ifSortDown]="ifSortDown" [showDelete]="ifDelete" [showUpdate]="ifUpdate"
+                [tableDataKeys]="myEmployeesListKeys" [tableData]="myEmployeesArr" (SortTableDown)="sortTableDown($event)" (editData)="updateEmployee($event)" (deleteData)="deleteEmployee($event)"
+                (SortTableUp)="sortTableUp($event)">
+            </app-smart-table>
+        </div>
+    </div>
+</app-smart-card>

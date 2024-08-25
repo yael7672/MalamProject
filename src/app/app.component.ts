@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AppProperties } from './app-properties.interface';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'ClientProjectYaelBanay';
+  appProperties!: AppProperties;
+  constructor(private appService: AppService) {
+  var x = this.appService.getAppProperties()
+   console.log(x);
+   
+  }
+
+  ngOnInit(): void {
+    this.appProperties = this.appService.getAppProperties();
+  }
 }
